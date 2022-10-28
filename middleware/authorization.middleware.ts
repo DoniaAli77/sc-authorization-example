@@ -10,12 +10,9 @@ import { NextFunction, Request, Response } from 'express';
 */
 const isUserAuthorized = (roles: String[]) => {
   return (req: Request, res: Response, next: NextFunction): NextFunction | void => {
-    console.log('roles', roles)
-    console.log('req.user.role', req.user.role)
     if (!roles.includes(req.user.role)) {
-      return next(new Error(`Role(${req.user.role}) is not allowed to access this resource.`))
+      res.status(400).json(`Role(${req.user.role}) is not allowed to access this resource.`);
     }
-    console.log('user is authorized!')
     next();
   }
 }

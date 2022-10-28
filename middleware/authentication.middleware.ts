@@ -25,7 +25,7 @@ import { verify } from 'jsonwebtoken';
 
     next();
   } catch (e: any) {
-    throw new Error(e.message);
+    res.status(400).json(e.message);
   }
 }
 

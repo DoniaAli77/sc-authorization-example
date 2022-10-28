@@ -14,9 +14,13 @@ class UserController {
   login(req: Request, res: Response):  Response<AuthToken> {
     const { username, password } = req.body;
     if (!username || !password) {
-      throw new Error('Username & Password is required for login');
+      return res.status(400).json('Username & Password is required for login');
     }
-    return res.json(userService.login(req.body));
+    try {
+      return res.status(200).json(userService.login(req.body));
+    } catch (e: any) {
+      return res.status(400).json(e.message);
+    }    
   }
 
   /**
@@ -27,7 +31,11 @@ class UserController {
    */
    getUser(req: Request, res: Response): Response<User> {
     const { username } = req.params;
-    return res.json(userService.getUser({ username }))
+    try {
+      return res.status(200).json(userService.getUser({ username }))
+    } catch (e: any) {
+      return res.status(400).json(e.message);
+    }
   }  
 
   /**
@@ -37,7 +45,11 @@ class UserController {
    * @returns User Object
    */
    updateUser(req: Request, res: Response): Response<User> {
-    return res.json(userService.updateUser(req.body));
+    try {
+      return res.status(200).json(userService.updateUser(req.body));
+    } catch (e: any) {
+      return res.status(400).json(e.message);
+    }    
   }  
 };
 

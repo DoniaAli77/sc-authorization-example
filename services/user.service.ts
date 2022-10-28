@@ -31,9 +31,7 @@ class UserService {
    */
   login(user: UserDto): AuthToken {
     try {
-      console.log('user', user)
       const userExists: User = users[user.username];
-      console.log('userExists', userExists)
       if (!userExists) {
         throw new Error('user does not exist');
       }
@@ -55,7 +53,6 @@ class UserService {
    */
    getUser(user: UserDto): User {
     try {
-      console.log('user', user)
       const userExists: User = users[user.username];
       if (!userExists) {
         throw new Error('user does not exist');
