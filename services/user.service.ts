@@ -52,6 +52,7 @@ class UserService {
    * @returns User Object
    */
    getUser(user: UserDto): User {
+    console.log(user.username);
     try {
       const userExists: User = users[user.username];
       if (!userExists) {
